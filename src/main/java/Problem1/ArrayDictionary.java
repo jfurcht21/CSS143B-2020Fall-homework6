@@ -45,7 +45,29 @@ public class ArrayDictionary implements Dictionary {
 
     @Override
     public void remove(String key) {
-        // homework
+        int hashedKey = hashFunction(key);
+        KVEntry ptr = entries[hashedKey];
+        KVEntry ptr2 = null;
+
+        //if first value is is key to be deleted
+        if(ptr != null && ptr.key == key){
+            entries[hashedKey] = ptr.next;
+            return;
+        }
+
+        //if list is not null and first value is not the key, iterate through all values
+        while(ptr.next != null && ptr.key != key){
+            ptr2 = ptr;
+            ptr = ptr.next;
+        }
+
+        //hit of of list and kay not found
+        if(ptr == null){
+            return;
+        }
+
+        ptr2.next = ptr.next;
+
     }
 
     @Override
